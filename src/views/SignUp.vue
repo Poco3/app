@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     Signup() {
-      this.$store.dispatch("commitsignup", {
+      this.$store.dispatch("commitUser", {
         email: this.email,
         password: this.password,
         username: this.username,
