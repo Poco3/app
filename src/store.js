@@ -6,9 +6,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        email: "",
-        password: "",
-        username: "",
+        user: {
+            email: "",
+            password: "",
+            username: "",
+        }
     },
     getters: {
         email: state => state.email,
@@ -16,17 +18,19 @@ export default new Vuex.Store({
         username: state => state.username,
     },
     mutations: {
-        signup(state, word) {
+        setUser(state, word) {
             state.email = word.email
             state.password = word.password
             state.username = word.username
         }
     },
     actions: {
-        commitsignup(context, word) {
+        commitUser(context, word) {
             firebase.auth().createUserWithEmailAndPassword(word.email, word.password)
                 .then(() => {
-                    context.commit('signup', word)
+                    context.commit('setUser', word)
+                }).catch((error) => {
+                    console.log(error);
                 })
 
         }
